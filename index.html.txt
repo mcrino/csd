@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cruscotto · Servizi Inclusione</title>
+<style>
+  :root{
+    --blue:#1582c9;
+    --blue-dark:#0e6aa6;
+    --green:#96bf0d;
+    --green-dark:#7ba00a;
+    --bg:#f4f8fb;
+    --card:#ffffff;
+    --text:#22303a;
+    --muted:#6b7a86;
+    --border:#dce7ef;
+    --radius:16px;
+    --shadow:0 1px 3px rgba(21,130,201,.06),0 6px 18px rgba(21,130,201,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.5;
+    padding:0 20px 64px;
+  }
+  /* Header con fascia istituzionale */
+  header{
+    max-width:1100px;margin:0 auto;padding:28px 0 22px;
+    border-bottom:3px solid var(--blue);
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  .logo{height:64px;width:auto;display:block}
+  .head-txt h1{font-size:1.5rem;font-weight:700;color:var(--blue);letter-spacing:-.01em}
+  .head-txt .sub{color:var(--muted);font-size:.9rem;margin-top:2px}
+  .head-txt .sub b{color:var(--green-dark);font-weight:700}
+
+  .wrap{max-width:1100px;margin:0 auto}
+  #search{
+    width:100%;max-width:440px;margin:24px 0 4px;padding:12px 16px;
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    color:var(--text);font-size:.95rem;outline:none;box-shadow:var(--shadow);
+    transition:border-color .15s,box-shadow .15s;
+  }
+  #search:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,130,201,.12)}
+
+  section{margin-top:36px}
+  h2{
+    display:flex;align-items:center;gap:10px;
+    font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--blue);margin-bottom:16px;font-weight:700;
+  }
+  h2::before{content:"";width:22px;height:4px;border-radius:3px;background:var(--green)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  .card{
+    display:flex;flex-direction:column;gap:8px;
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;text-decoration:none;color:var(--text);box-shadow:var(--shadow);
+    border-top:3px solid var(--blue);
+    transition:transform .13s ease,box-shadow .13s ease,border-top-color .13s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 8px 26px rgba(21,130,201,.16);border-top-color:var(--green)}
+  .card .ico{font-size:1.5rem;line-height:1}
+  .card .title{font-weight:700;font-size:1.02rem;color:var(--blue-dark)}
+  .card .desc{color:var(--muted);font-size:.84rem}
+  .hidden{display:none}
+
+  footer{max-width:1100px;margin:52px auto 0;padding-top:18px;border-top:1px solid var(--border);
+    color:var(--muted);font-size:.78rem;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <!-- Carica il file logo.png nel repo e lascia questo riferimento.
+       Se non hai il file, rimuovi il tag <img> e resta il solo testo. -->
+  <img class="logo" src="logo.png" alt="Diaconia Valdese · Servizi Inclusione">
+  <div class="head-txt">
+    <h1>Cruscotto Servizi Inclusione</h1>
+    <p class="sub">Collegamenti rapidi e procedure operative · <b>Diaconia Valdese</b></p>
+  </div>
+</header>
+
+<div class="wrap">
+  <input id="search" type="text" placeholder="Filtra collegamenti..." autocomplete="off">
+
+  <section>
+    <h2>Strumenti</h2>
+    <div class="grid">
+      <a class="card" href="https://drive.google.com" target="_blank" rel="noopener">
+        <span class="ico">📁</span><span class="title">Google Drive</span>
+        <span class="desc">Cartelle condivise</span>
+      </a>
+      <a class="card" href="#" target="_blank" rel="noopener">
+        <span class="ico">📅</span><span class="title">Calendario</span>
+        <span class="desc">Agenda e riunioni</span>
+      </a>
+      <a class="card" href="#" target="_blank" rel="noopener">
+        <span class="ico">✉️</span><span class="title">Mail / PEC</span>
+        <span class="desc">Posta istituzionale</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Procedure</h2>
+    <div class="grid">
+      <a class="card" href="#" target="_blank" rel="noopener">
+        <span class="ico">📝</span><span class="title">Onboarding utente</span>
+        <span class="desc">Attivazione nuovo servizio</span>
+      </a>
+      <a class="card" href="#" target="_blank" rel="noopener">
+        <span class="ico">🤝</span><span class="title">Presa in carico</span>
+        <span class="desc">Percorso di inclusione</span>
+      </a>
+      <a class="card" href="#" target="_blank" rel="noopener">
+        <span class="ico">💳</span><span class="title">Spese e rimborsi</span>
+        <span class="desc">Procedura mensile</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<footer>Ultimo aggiornamento: <span id="date"></span></footer>
+
+<script>
+  const input = document.getElementById('search');
+  const cards = [...document.querySelectorAll('.card')];
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    cards.forEach(c => c.classList.toggle('hidden', q && !c.textContent.toLowerCase().includes(q)));
+  });
+  document.getElementById('date').textContent =
+    new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'});
+</script>
+
+</body>
+</html>
